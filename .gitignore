@@ -1,0 +1,8 @@
+.dockerignore
+.idea
+auth.json
+composer.phar
+Dockerifle
+tmp
+vendor
+var/logs
