@@ -14,9 +14,10 @@
     ],
     "require": {
         "php": ">=7.4",
-        "monolog/monolog": "^1.17",
+        "monolog/monolog": "^1.17"
     },
     "require-dev": {
+        "ext-dom": "*",
         "phpunit/phpunit": "7.5.16",
         "phpstan/phpstan": "^0.12.4"
     },

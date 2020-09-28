@@ -21,7 +21,7 @@ class LoggerWrapperTest extends HelperTestCase
 {
     protected string $_pathToLogfile = __DIR__ . '/tmp/app.log';
     protected $_logMock;
-    protected LoggerWrapper $_logger;
+    protected ?LoggerWrapper $_logger;
 
     protected function setUp(): void
     {
@@ -53,7 +53,10 @@ class LoggerWrapperTest extends HelperTestCase
      */
     public function testIsDevEnvironmentDefault(): void
     {
-        $this->_logger = new LoggerWrapper($this->createMock(CustomLogMock::class));
+        $this->_logger = new LoggerWrapper(
+            $this->createMock(CustomLogMock::class)
+        );
+
         $this->assertFalse($this->_logger->isDevEnvironment());
     }
 
@@ -63,7 +66,11 @@ class LoggerWrapperTest extends HelperTestCase
      */
     public function testIsDevEnvironmentTrue(): void
     {
-        $this->_logger = new LoggerWrapper($this->createMock(CustomLogMock::class), true);
+        $this->_logger = new LoggerWrapper(
+            $this->createMock(CustomLogMock::class),
+            true
+        );
+
         $this->assertTrue($this->_logger->isDevEnvironment());
     }
 
@@ -85,6 +92,7 @@ class LoggerWrapperTest extends HelperTestCase
     {
         $this->_logger = $this->_setUpCustomLogger();
         $this->_logger->log('test message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'test message [priority: 6]');
     }
 
@@ -96,7 +104,11 @@ class LoggerWrapperTest extends HelperTestCase
     {
         $this->_logger = $this->_setUpCustomLogger();
         $this->_logger->log('test message', 'emergency', ['option_1', 'option_2', 'option_3']);
-        $this->assertStringEqualsFile($this->_pathToLogfile, 'test message [priority: 0] [options: option_1, option_2, option_3]');
+
+        $this->assertStringEqualsFile(
+            $this->_pathToLogfile,
+            'test message [priority: 0] [options: option_1, option_2, option_3]'
+        );
     }
 
     /**
@@ -106,7 +118,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testLogInfoToMonolog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->log('test message', 'info');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'test message [priority: 200]');
     }
 
@@ -117,7 +131,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testLogCriticalToMonologWithoutStreamHandler(): void
     {
         $this->_logger = $this->_setUpMonoLogger(false);
+
         $this->_logger->log('test message', 'critical');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'test message [priority: 500]');
     }
 
@@ -128,7 +144,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testAlertToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->alert('alert message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'alert message [priority: 1]');
     }
 
@@ -139,7 +157,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testAlertToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->alert('alert message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'alert message [priority: 550]');
     }
 
@@ -150,7 +170,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testCritToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->crit('crit message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'crit message [priority: 2]');
     }
 
@@ -161,7 +183,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testCritToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->crit('crit message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'crit message [priority: 500]');
     }
 
@@ -172,7 +196,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testDebugToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->debug('debug message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'debug message [priority: 7]');
     }
 
@@ -183,7 +209,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testDebugToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->debug('debug message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'debug message [priority: 100]');
     }
 
@@ -194,7 +222,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testEmergToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->emerg('emerg message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'emerg message [priority: 0]');
     }
 
@@ -205,7 +235,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testEmergToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->emerg('emerg message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'emerg message [priority: 600]');
     }
 
@@ -216,7 +248,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testErrorToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->error('error message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'error message [priority: 3]');
     }
 
@@ -227,7 +261,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testErrorToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->error('error message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'error message [priority: 400]');
     }
 
@@ -238,7 +274,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testInfoToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->info('info message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'info message [priority: 6]');
     }
 
@@ -249,7 +287,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testInfoToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->info('info message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'info message [priority: 200]');
     }
 
@@ -260,7 +300,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testNoticeToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->notice('notice message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'notice message [priority: 5]');
     }
 
@@ -271,7 +313,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testNoticeToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->notice('notice message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'notice message [priority: 250]');
     }
 
@@ -282,7 +326,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testWarningToCustomLog(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $this->_logger->warning('warning message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'warning message [priority: 4]');
     }
 
@@ -293,7 +339,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testWarningToMonoLog(): void
     {
         $this->_logger = $this->_setUpMonoLogger();
+
         $this->_logger->warning('warning message');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'warning message [priority: 300]');
     }
 
@@ -304,7 +352,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testLogOrDieOnDevToCustLogNotDevLogAsError(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $result = $this->_logger->logOrDieOnDev('test message', true, 'result', 'category_1');
+
         $this->assertStringEqualsFile($this->_pathToLogfile, 'test message [priority: 3] [options: category_1]');
         $this->assertSame($result, 'result');
     }
@@ -316,7 +366,9 @@ class LoggerWrapperTest extends HelperTestCase
     public function testLogOrDieOnDevToCustLogNotDevLogNotAsError(): void
     {
         $this->_logger = $this->_setUpCustomLogger();
+
         $result = $this->_logger->logOrDieOnDev('test message', false, 'result', 'category_1');
+
         $this->assertFileNotExists($this->_pathToLogfile);
         $this->assertSame($result, 'result');
     }
