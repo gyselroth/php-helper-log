@@ -3,7 +3,7 @@
 /**
  * Copyright (c) 2017-2020 gyselroth™  (http://www.gyselroth.net)
  *
- * @package \gyselroth\Helper
+ * @package \gyselroth\HelperLog
  * @author  gyselroth™  (http://www.gyselroth.com)
  * @link    http://www.gyselroth.com
  * @license Apache-2.0
@@ -49,7 +49,7 @@ class LoggerWrapperTest extends HelperTestCase
 
     /**
      * Test LoggerWrapper::isDevEnvironment without $isDevEnvironment
-     * @throws \Gyselroth\Helper\Exception\LoggerException
+     * @throws \Gyselroth\HelperLog\Exception\LoggerException
      */
     public function testIsDevEnvironmentDefault(): void
     {
@@ -59,7 +59,7 @@ class LoggerWrapperTest extends HelperTestCase
 
     /**
      * Test LoggerWrapper::isDevEnvironment with $isDevEnvironment = true
-     * @throws \Gyselroth\Helper\Exception\LoggerException
+     * @throws \Gyselroth\HelperLog\Exception\LoggerException
      */
     public function testIsDevEnvironmentTrue(): void
     {
@@ -69,7 +69,7 @@ class LoggerWrapperTest extends HelperTestCase
 
 //    /**
 //     * Test LoggerWrapper::isDevEnvironment with $isDevEnvironment = false
-//     * @throws \Gyselroth\Helper\Exception\LoggerException
+//     * @throws \Gyselroth\HelperLog\Exception\LoggerException
 //     */
 //    public function testIsDevEnvironmentFalse()
 //    {
@@ -333,7 +333,7 @@ class LoggerWrapperTest extends HelperTestCase
     /**
      * @param bool $isDevEnvironment
      * @return LoggerWrapper
-     * @throws \Gyselroth\Helper\Exception\LoggerException
+     * @throws \Gyselroth\HelperLog\Exception\LoggerException
      */
     protected function _setUpCustomLogger(bool $isDevEnvironment = false): LoggerWrapper
     {
@@ -349,7 +349,7 @@ class LoggerWrapperTest extends HelperTestCase
     /**
      * @param bool $hasStreamHandlers
      * @return LoggerWrapper
-     * @throws \Gyselroth\Helper\Exception\LoggerException
+     * @throws \Gyselroth\HelperLog\Exception\LoggerException
      */
     protected function _setUpMonoLogger(bool $hasStreamHandlers = true): LoggerWrapper
     {

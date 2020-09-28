@@ -48,7 +48,7 @@ to write any log-entries):
  };
  
  // Register host application's logger component within gyselroth Helper's logger wrapper
- new \Gyselroth\Helper\LoggerWrapper($app->getContainer()['logger']);
+ new \Gyselroth\HelperLog\LoggerWrapper($app->getContainer()['logger']);
 ```
 
 
