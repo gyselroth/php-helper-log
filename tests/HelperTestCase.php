@@ -11,7 +11,7 @@
 
 namespace Tests;
 
-use Gyselroth\Helper\LoggerWrapper;
+use Gyselroth\HelperLog\LoggerWrapper;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +21,7 @@ class HelperTestCase extends TestCase {
 
     protected string $_pathToLogfile = __DIR__ . '/tmp/app.log';
     protected $_logMock;
+
     protected ?LoggerWrapper $_logger;
 
     /**

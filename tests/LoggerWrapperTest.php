@@ -11,7 +11,7 @@
 
 namespace Tests;
 
-use Gyselroth\Helper\LoggerWrapper;
+use Gyselroth\HelperLog\LoggerWrapper;
 use Tests\Fixtures\CustomLogMock;
 use Tests\Fixtures\MonologMock;
 use Tests\Fixtures\TestFilesHelper;

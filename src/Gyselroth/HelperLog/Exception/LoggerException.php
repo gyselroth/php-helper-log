@@ -9,7 +9,7 @@
  * @license Apache-2.0
  */
 
-namespace Gyselroth\Helper\Exception;
+namespace Gyselroth\HelperLog\Exception;
 
 class LoggerException extends \Exception {
 }

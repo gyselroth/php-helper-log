@@ -9,7 +9,7 @@
  * @license Apache-2.0
  */
 
-namespace Gyselroth\Helper;
+namespace Gyselroth\HelperLog;
 
 use Gyselroth\HelperLog\Exception\LoggerException;
 use Monolog\Handler\StreamHandler;
