@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Gyselroth\\Helper\\": "src/Gyselroth/HelperLog/"
+            "Gyselroth\\HelperLog\\": "src/Gyselroth/HelperLog/"
         }
     },
     "autoload-dev": {
